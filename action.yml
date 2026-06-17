@@ -1,0 +1,42 @@
+name: 'Paperwright E2E Tests'
+description: 'Runs end-to-end tests for Paper/Spigot plugins using Paperwright'
+author: 'Drownek'
+branding:
+  icon: 'play'
+  color: 'blue'
+
+inputs:
+  java-version:
+    description: 'Java version to use for the build'
+    required: false
+    default: '17'
+  java-distribution:
+    description: 'Java distribution to use (e.g., temurin, corretto, zulu)'
+    required: false
+    default: 'temurin'
+  node-version:
+    description: 'Node.js version to use for the tests'
+    required: false
+    default: '16'
+  gradle-args:
+    description: 'Additional arguments to pass to gradle (default: paperwrightTest)'
+    required: false
+    default: 'paperwrightTest'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.java-distribution }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Run Paperwright Tests
+      shell: bash
+      run: ./gradlew ${{ inputs.gradle-args }}
