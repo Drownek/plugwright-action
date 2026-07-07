@@ -1,5 +1,5 @@
-name: 'Paperwright E2E Tests'
-description: 'Runs end-to-end tests for Paper/Spigot plugins using Paperwright'
+name: 'Plugwright E2E Tests'
+description: 'Runs end-to-end tests for Paper/Spigot plugins using Plugwright'
 author: 'Drownek'
 branding:
   icon: 'play'
@@ -19,9 +19,9 @@ inputs:
     required: false
     default: '24'
   gradle-args:
-    description: 'Additional arguments to pass to gradle (default: paperwrightTest)'
+    description: 'Additional arguments to pass to gradle (default: plugwrightTest)'
     required: false
-    default: 'paperwrightTest'
+    default: 'plugwrightTest'
   working-directory:
     description: 'Directory where gradlew is located'
     required: false
@@ -41,7 +41,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Run Paperwright Tests
+    - name: Run Plugwright Tests
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: ./gradlew ${{ inputs.gradle-args }}
